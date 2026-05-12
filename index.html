@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>请假审批</title>
+    <style>
+        body { margin: 0; padding: 0; background-color: #fff; font-family: -apple-system, Helvetica, sans-serif; color: #333; -webkit-font-smoothing: antialiased; }
+        .page-wrapper { width: 100%; min-height: 100vh; background: #fff; }
+        .nav-title { text-align: center; padding: 15px 0 10px 0; font-size: 18px; font-weight: 500; background: #fff; border-bottom: 1px solid #f2f2f2; }
+        .domain { font-size: 11px; color: #999; font-weight: normal; display: block; margin-top: 2px; }
+        .form-container { padding: 16px 16px 60px 16px; }
+        .input-group { margin-bottom: 18px; }
+        label { display: block; font-size: 15px; color: #666; margin-bottom: 8px; }
+        .input-box { background-color: #f7f8fa; border: 1px solid #ebedf0; border-radius: 4px; padding: 12px; font-size: 16px; color: #333; min-height: 20px; }
+        .textarea { min-height: 70px; }
+        .sign-container { padding: 10px 0; }
+        .sign-container img { width: 220px; height: auto; display: block; }
+        .process-section { margin-top: 25px; border-top: 1px solid #f5f5f5; padding-top: 20px; }
+        .process-header { font-size: 15px; color: #333; margin-bottom: 20px; padding-left: 10px; border-left: 3px solid #2d8cf0; font-weight: bold; }
+        .process-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #f9f9f9; align-items: flex-start; }
+        .process-left { flex: 1; }
+        .p-title { font-size: 15px; font-weight: 500; color: #333; }
+        
+        /* 核心修正：强制所有文字变灰色，防止缓存残留 */
+        .p-sub, .p-opinion { 
+            font-size: 13px !important; 
+            color: #999 !important; 
+            margin-top: 5px !important; 
+        }
+        
+        .process-time { font-size: 13px; color: #bbb; white-space: nowrap; margin-left: 10px; }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="nav-title">请假审批<span class="domain">xg.whrcx.com</span></div>
+        <div class="form-container">
+            <div class="input-group"><label>学生姓名</label><div class="input-box" id="name">--</div></div>
+            <div class="input-group"><label>班级</label><div class="input-box" id="class">--</div></div>
+            <div class="input-group"><label>寝室号</label><div class="input-box" id="dorm">--</div></div>
+            <div class="input-group"><label><span style="color:red">*</span>联系方式</label><div class="input-box" id="phone">--</div></div>
+            <div class="input-group"><label>请假原因</label><div class="input-box textarea" id="reason">--</div></div>
+            <div class="input-group"><label>上传图片</label><div style="height:10px"></div></div>
+            <div class="input-group"><label>地址</label><div class="input-box textarea" id="address">--</div></div>
+            <div class="input-group"><label>出校时间</label><div class="input-box" id="outTime">--</div></div>
+            <div class="input-group"><label>入校时间</label><div class="input-box" id="inTime">--</div></div>
+            <div class="input-group"><label>时长</label><div class="input-box" id="duration">--</div></div>
+            <div class="input-group">
+                <label>手写签名</label>
+                <div class="sign-container">
+                    <img id="signImg" src="https://gist.githubusercontent.com/wslssp123456/b64e08bdfad8f9ceef08396a9b3c8fe5/raw/sign.png" alt="签名">
+                </div>
+            </div>
+            <div class="process-section">
+                <div class="process-header">流程</div>
+                <div class="process-item">
+                    <div class="process-left"><div class="p-title">学生:<span id="p-name">--</span></div><div class="p-sub">提交</div></div>
+                    <div class="process-time" id="t-submit">--</div>
+                </div>
+                <div class="process-item">
+                    <div class="process-left">
+                        <div class="p-title">辅导员:<span id="teacher">--</span></div>
+                        <div class="p-sub">审批通过</div>
+                        <div class="p-opinion" id="opinion">审批意见：已与家长联系,情况属实</div>
+                    </div>
+                    <div class="process-time" id="t-teacher">--</div>
+                </div>
+                <div class="process-item">
+                    <div class="process-left"><div class="p-title">学生工作处1:<span id="admin">--</span></div><div class="p-sub">审批通过</div></div>
+                    <div class="process-time" id="t-admin">--</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const params = new
+        URLSearchParams(window.location.search);
+        ['name', 'class', 'dorm', 'phone', 'reason', 'address', 'outTime', 'inTime', 'duration', 'teacher', 'admin', 't-submit', 't-teacher', 't-admin'].forEach(key => {
+            let val = params.get(key);
+            if (val) {
+                const el = document.getElementById(key);
+                if(el) el.innerText = val;
+                if(key === 'name') document.getElementById('p-name').innerText = val;
+            }
+        });
+        let s = params.get('sign');
+        if(s) document.getElementById('signImg').src = s;
+    </script>
+</body>
+</html>
