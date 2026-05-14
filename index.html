@@ -19,7 +19,7 @@
         .sign-container img { width: 220px; height: auto; display: block; }
         .process-section { margin-top: 25px; border-top: 1px solid #f5f5f5; padding-top: 20px; }
         .process-header { font-size: 15px; color: #333; margin-bottom: 20px; padding-left: 10px; border-left: 3px solid #2d8cf0; font-weight: bold; }
-        .process-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #f9f9f9; align-items: flex-start; }
+  .process-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #f9f9f9; align-items: flex-start; }
         .process-left { flex: 1; }
         .p-title { font-size: 15px; font-weight: 500; color: #333; }
         
@@ -69,14 +69,13 @@
                 </div>
                 <div class="process-item">
                     <div class="process-left"><div class="p-title">学生工作处1:<span id="admin">--</span></div><div class="p-sub">审批通过</div></div>
-                    <div class="process-time" id="t-admin">--</div>
+<div class="process-time" id="t-admin">--</div>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        const params = new
-        URLSearchParams(window.location.search);
+        const params = new URLSearchParams(window.location.search);
         ['name', 'class', 'dorm', 'phone', 'reason', 'address', 'outTime', 'inTime', 'duration', 'teacher', 'admin', 't-submit', 't-teacher', 't-admin'].forEach(key => {
             let val = params.get(key);
             if (val) {
